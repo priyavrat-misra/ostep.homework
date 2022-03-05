@@ -1,8 +1,8 @@
 // calling fork(), wait() and exec()
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/wait.h>
+#include <stdio.h>  // printf, fprintf, stderr
+#include <stdlib.h>  // exit
+#include <unistd.h>  // fork, exec*
+#include <sys/wait.h>  // wait
 
 int main(int argc, char *argv[]) {
 	printf("(pid:%d) hello world\n", (int) getpid());
@@ -13,7 +13,13 @@ int main(int argc, char *argv[]) {
 	} else if (rc == 0) {
 		printf("(pid:%d) hello, I am child\n", (int) getpid());
 		char *myargs[] = {"wc", "p3.c", NULL};
-		execvp(myargs[0], myargs);
+
+		execvp(myargs[0], myargs); // or execvp("/usr/bin/wc", myargs);
+		// v or l: vector or list (note: NULL has to be passed as well)
+		// p: path (if not mentioned, then have to add the full path)
+		// e: to pass a different set of environment variables
+		// e.g., execl("/usr/bin/wc", "wc", "p3.c", NULL);
+
 		printf("this line won't print");
 	} else {
 		int rc_wait = wait(NULL);

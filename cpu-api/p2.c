@@ -1,8 +1,8 @@
 // calling fork() and wait()
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/wait.h>
+#include <stdio.h>  // printf, fprintf, stderr
+#include <stdlib.h>  // exit
+#include <unistd.h>  // fork, getpid
+#include <sys/wait.h>  // wait
 
 int main(int argc, char *argv[]) {
 	printf("(pid:%d) hello world\n", (int) getpid());
